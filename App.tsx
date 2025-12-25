@@ -76,9 +76,17 @@ const App: React.FC = () => {
   }, [isAutoPlaying, triggerDamage]);
 
   const generateScenario = async () => {
+    const apiKey = process.env.API_KEY;
+    if (!apiKey) {
+      setAiScenario("提示：未检测到有效 API Key，AI 功能已禁用。");
+      // 依然触发一些飘字作为反馈
+      for(let i=0; i<5; i++) setTimeout(() => triggerDamage(), i * 100);
+      return;
+    }
+
     setIsGenerating(true);
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      const ai = new GoogleGenAI({ apiKey });
       const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
         contents: "生成一个简短、史诗级的 RPG 战斗场景描述（1 句话，中文）。"

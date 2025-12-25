@@ -5,7 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>游戏伤害飘字模拟器</title>
+    <!-- 增加 process 对象定义，防止浏览器报错 -->
+    <script>
+      window.process = { env: { API_KEY: "" } };
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              orbitron: ['Orbitron', 'Inter', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
@@ -16,9 +31,8 @@
         background-color: #0f172a;
         font-family: 'Inter', 'Noto Sans SC', sans-serif;
       }
-      .font-orbitron {
-        font-family: 'Orbitron', 'Noto Sans SC', sans-serif;
-      }
+      /* 隐藏 Tailwind Play CDN 警告（仅在生产预览中） */
+      .tw-play-cdn-warning { display: none !important; }
     </style>
 <script type="importmap">
 {
@@ -34,5 +48,7 @@
 </head>
 <body>
     <div id="root"></div>
+    <!-- 显式引入 index.tsx 入口 -->
+    <script type="module" src="index.tsx"></script>
 </body>
 </html>
