@@ -13,6 +13,8 @@ export interface CurvePoint {
 
 export interface FloatConfig {
   duration: number; // 秒
+  autoSpawnRate: number; // 每次生成的数量 (0-20)
+  autoSpawnInterval: number; // 生成间隔 (ms)
   scaleCurve: CurvePoint[]; // 缩放关键帧
   opacityCurve: CurvePoint[]; // 透明度关键帧
   moveXCurve: CurvePoint[]; // 水平位移关键帧

@@ -7,6 +7,8 @@ interface Props {
   config: FloatConfig;
 }
 
+const UNITY_TO_CSS_SCALE = 3.75;
+
 const DamageText: React.FC<Props> = ({ instance, config }) => {
   const { value, type, x, y } = instance;
 
@@ -44,8 +46,10 @@ const DamageText: React.FC<Props> = ({ instance, config }) => {
       const t = i / samples;
       const scale = interpolate(t, config.scaleCurve);
       const opacity = interpolate(t, config.opacityCurve);
-      const moveX = interpolate(t, config.moveXCurve) * randomFactor;
-      const moveY = -interpolate(t, config.moveYCurve) * randomFactor;
+      
+      // 应用 Unity -> CSS 比例换算
+      const moveX = interpolate(t, config.moveXCurve) * randomFactor * UNITY_TO_CSS_SCALE;
+      const moveY = -interpolate(t, config.moveYCurve) * randomFactor * UNITY_TO_CSS_SCALE;
       
       const percentage = (t * 100).toFixed(1);
       steps.push(`${percentage}% { 
